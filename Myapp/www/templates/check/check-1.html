@@ -1,0 +1,52 @@
+<ion-view view-title="热更新" id="check"  ng-controller="CheckCtrl" hide-nav-bar="true">
+    <div class="head" ng-class="{'title1':serious,'title2':dangerous,'title3':general,'title4':good}">
+        <button class="button button-clear">
+            <i class="icon ion-ios-arrow-left"></i>
+        </button>
+       <span class="titcent" >诊断报告</span>
+    </div>
+   <ion-content style="margin-top: 43px">
+       <div class="headers" ng-class="{'active1':serious,'active2':dangerous,'active3':general,'active4':good}">
+            <div class="round1 roundg" >
+                <img src={{src1}} alt="">
+                <div style="position: absolute;top: 0rem;left: -.3rem;width: 122px">
+                    <span class="score-num">{{scoreNum}}</span>
+                    <span class="sup" ng-class="{'biaoyu1':serious,'biaoyu2':dangerous,'biaoyu3':general,'biaoyu4':good}">分</span>
+                </div>
+            </div>
+           <div class="round2 roundg" ng-click="rotating()" >
+               <img src={{src2}} alt="">
+           </div>
+
+            <div class="test">
+                <p >{{comment}}</p>
+                <span class="ascension" ng-show="isjie">提升评分</span>
+            </div>
+       </div>
+       <div class="stor1" >
+           <div class="tite">
+               <span ng-class="{'pingfen1':serious,'pingfen2':dangerous,'pingfen3':general,'pingfen4':good}"></span><span style="padding: 10px" ng-class="{'biaoyu1':serious,'biaoyu2':dangerous,'biaoyu3':general,'biaoyu4':good}">我们的门店评分</span><span ng-class="{'pingfen1':serious,'pingfen2':dangerous,'pingfen3':general,'pingfen4':good}"></span>
+           </div>
+           <div class="prompt"data-col="" style="position: relative;margin-top: 25px">
+               <span class="nature gaow" ng-class="{'gaowei':serious}">高危</span><span class="nature weix" ng-class="{'weixian':dangerous}">危险</span><span class="nature yib" ng-class="{'yiban':general}">一般</span><span class="nature youl" ng-class="{'youlian':good}">优良</span>
+                <div class="biaozhi">
+
+                </div>
+               <span class="num1 num">10</span><span class="num2 num" >30</span><span class="num3 num">59</span><span class="num4 num">79</span><span class="num5 num">100</span>
+           </div>
+
+       </div>
+       <div class="list " style="margin-bottom: 5px">
+           <span class="item item-divider tipValue" style="padding: .7rem .5rem;font-size: 16px;overflow: auto;white-space: inherit" ng-show="warntip" ng-class="{'biaoyu1':serious,'biaoyu2':dangerous,'biaoyu3':general,'biaoyu4':good}">
+               {{warntip}}
+           </span>
+           <span class="item item-divider" style="padding: .7rem .5rem;font-size: 18px">
+               检测建议
+           </span>
+           <span class="item item-divider tipValue" ng-repeat="advice in advice" style="color: #888;overflow: auto;white-space: inherit">{{$index+1}}:{{advice.tipsValue}}</span>
+           <div style="width: 90%;margin-top: 5px;height: 2.5rem">
+               <div ng-show="isjie" class="jieju" ng-class="{'jieju1':serious,'jieju2':dangerous,'jieju3':general,'jieju4':good}">我要解决</div>
+           </div>
+       </div>
+   </ion-content>
+</ion-view>

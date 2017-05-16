@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="www.atguigu.com">
+    <!-- 苹果手机是否全屏显示页面-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--控制苹果手机状态栏的颜色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <script type="text/javascript" src="../js/angular-1.5.5/angular.js"></script>
+    <title>form</title>
+    <style>
+        .form .ng-invalid{
+            -webkit-transition: all linear 0.5s;
+            transition: all linear 0.5s;
+            background: transparent;
+        }
+        .form .ng-invalid{
+            background: red;
+        }
+    </style>
+</head>
+<body ng-app="formApp">
+
+<form action="#" name="form" ng-controller="FormController" class="form">
+    userType :<input type="text" ng-model="userType" name="type" required>
+    <span class="error" ng-show="form.type.$error.required">*</span><br>
+    <span class="error" ng-show="form.$valid">已填</span><br>
+    userName : <input type="text" minlength="5" maxlength="10" name="name" ng-model="userName">
+    <h4>{{userName}}</h4>
+    <span class="error" ng-show="form.name.$error.required">*</span><br>
+    <span class="error" ng-show="form.name.$error.minlength">5至10位</span><br>
+    <span class="error" ng-show="form.$valid">已填</span><br>
+    <input type="date" name="data" ng-model="data.data"  ng-change="chang()">
+    <p>{{dat}}</p>
+    <input type="datetime-local" name="dtaetime">
+    <!--<tt>userType={{userType}}</tt><br>-->
+    <!--<tt>form.type.$valid = {{form.type.$valid}}</tt><br>-->
+    <!--<tt>form.type.$error = {{form.type.$error}}</tt><br>-->
+    <!--<tt>form.$valid = {{form.$valid}}</tt><br>-->
+    <!--<tt>form.$error.required = {{!!form.$error.required}}</tt><br>-->
+</form>
+<div ng-controller="HtmlController">
+    <p ng-bind="myHtml"></p>
+</div>
+<script type="text/javascript">
+    angular.module('formApp',[])
+            .controller("FormController",function ($scope,$filter) {
+//                $scope.userType = "about"
+                $scope.dat = "";
+                $scope.chang = function () {
+                    var data = $scope.data.data;
+                    var time = $filter('date')(data, "yyyy-MM-dd");//格式化时间
+                    $scope.dat = time;
+                    console.log(time )
+                };
+
+            })
+            .controller("HtmlController",function ($scope) {
+                $scope.myHtml = "hello world<span>this is a ng-bind-html</span>"
+            })
+</script>
+</body>
+</html>

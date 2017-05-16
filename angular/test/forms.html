@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="www.atguigu.com">
+    <!-- 苹果手机是否全屏显示页面-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--控制苹果手机状态栏的颜色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+
+    <title></title>
+</head>
+<body ng-app="formApp">
+<form  ng-submit="signupForm()" ng-controller="signupController" name="signup_from">
+    <label>Your name</label>
+    <input type="text" placeholder="Name" name="name" ng-model="signup.name" ng-minlength="3" ng-maxlength="20" ng-required="true" >
+    <div class="error" ng-messages="signup_from.name.$error" ng-show="signup_from.name.$invalid && signup_from.$dirty" >
+        <div ng-message="required">
+            Make sure you enter your name
+        </div>
+        <div ng-message="minlength">
+            You name must be at least 3 characters
+        </div>
+        <div ng-message="maxlength">
+            Your name cannot be longer than 20 characters
+        </div>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+<script type="text/javascript" src="../js/angular-1.5.5/angular.js"></script>
+<script type="text/javascript" src="../js/angular-1.5.5/angular-messages.js"></script>
+<!--//<script type="text/javascript" src="../bower_components/angular-messages/angular-messages.js"></script>-->
+<script type="text/javascript">
+    angular.module("formApp",["ngMessages"])
+            .controller("signupController",function () {
+
+            })
+</script>
+</body>
+
+</html>

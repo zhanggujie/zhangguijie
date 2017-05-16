@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="www.atguigu.com">
+    <!-- 苹果手机是否全屏显示页面-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--控制苹果手机状态栏的颜色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+
+    <title></title>
+    <style>
+        .color{
+            color: red;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+<div ng-if="!check" id="div1">
+    wont see this Dom node not event in the source code
+</div>
+<div ng-if="check" id="div2">
+    Hi I dot exsit
+</div>
+<input type="checkbox" ng-model="check">check
+<script type="text/javascript" src="../js/jquery-1.10.1.js"></script>
+<script type="text/javascript" src="../js/angular-1.5.5/angular.js"></script>
+<script type="text/javascript">
+
+//    $("#div1").css({color : 'green'})
+    angular.module("myApp",[])
+            .controller("myController",function ($timeout) {
+                $timeout(function () {
+                    $("#div1").addClass("color");
+                },1000)
+
+            })
+    var ua = navigator.userAgent.toLowerCase();
+    console.log(ua);
+    function plusReady(){
+        console.log("ddd")
+        alert( "uuid: "+plus.device.uuid );
+    }
+    if(window.plus){
+        plusReady();
+    }else{
+        document.addEventListener("plusready",plusReady,false);
+    }
+</script>
+
+</body>
+</html>

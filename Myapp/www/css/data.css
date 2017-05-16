@@ -1,0 +1,72 @@
+.item-input .item-icon-left{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1.5rem;
+    background: #999999;
+    min-width: 2rem;
+    padding-left: 0;
+    margin-right: 5px;
+    overflow: hidden;
+
+}
+.imgae{
+    width: 100%;
+    display: block;
+}
+.item-divider{
+    padding: 18px 16px;
+}
+/*边框修改*/
+.noborder{
+    border-top: none;
+}
+.botborder{
+    border-bottom: none;
+}
+.border-item{
+    border-left: none;
+    border-right: none;
+    margin: 0px 5px 0 5px;
+}
+.input-label{
+    width: auto;
+    padding-right: 1.3rem;
+    color: #333;
+}
+
+sup{
+    color: #972f52;
+}
+/*头部背景颜色*/
+.bar.bar-stable{
+    background: #71527b;
+
+}
+/*标题字体颜色*/
+.bar.bar-stable .title{
+    color: #fff;
+}
+/*标题图标颜色*/
+.bar-stable .button.button-clear{
+    color: #fff;
+}
+.item-input .btn{
+    border-radius: 1rem;
+    background: #972f52;
+    margin-right: 16px;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+
+}
+.required {
+    color: #ef473a;
+}
+.secondary-buttons .activated{
+    color: #fff;
+    background: #972f52;
+    opacity: 1;
+}
+#data input{
+    color:#972f52;
+}

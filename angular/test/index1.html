@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="www.atguigu.com">
+    <!-- 苹果手机是否全屏显示页面-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--控制苹果手机状态栏的颜色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title></title><body>
+
+</head>
+<div ng-app="myApp">
+    <!--<input type="text" ng-model="name">-->
+    <!--<p>{{name}}</p>-->
+    <!--<p>{{value}}</p>-->
+    <input type="text"ng-model="input">
+    <p>hello {{input}}</p>
+    <div ng-controller="myCtrll">
+        <input type="text" ng-click="hello()" value="ctrll">
+    </div>
+    <div ng-controller="ParentCtrl">
+        <div ng-controller="SelfCtrl">
+            <a class="btn" ng-click="click()">click me</a>
+            <div ng-controller="ChildCtrl" ng-click="diao()">diaoni</div>
+        </div>
+        <div ng-controller="BroCtrl"></div>
+    </div>
+</div>
+<script type="text/javascript" src="../js/angular-1.5.5/angular.js"></script>
+<script type="text/javascript">
+    var app = angular.module("myApp",[]);
+    //定义服务
+    app.factory("hello",function () {
+        return {
+            hello : function () {
+                console.log('hello1 serve');
+
+            }
+        }
+    })
+    app.factory("hello2",function () {
+        return {
+            hello : function () {
+                console.log('hello2 serve');
+
+            }
+        }
+    });
+//    var $injector = angular.$injector();
+//    console.log(angular.equals($injector,get("$injector",$injector))
+//    console.log(angular.equals($injector.invoke(function($injector) {return $injector;}),$injector));
+    app.controller("myCtrll",function ($scope,hello,hello2) {
+        $scope.hello = function () {
+            hello.hello();
+            hello2.hello();
+        };
+    });
+    app.controller("ParentCtrl",function ($scope) {
+        $scope.$on('to-child',function (e,d) {
+            console.log("关我毛事")
+        })
+    })
+    app.controller("SelfCtrl",function ($scope) {
+        $scope.click = function () {
+            $scope.$broadcast("to-child","haha");
+            $scope.$emit("to-parent","hehe")
+        }
+        $scope.$on("to-part",function (e,d) {
+            console.log(d)
+        })
+    })
+    app.controller("ChildCtrl",function($scope){
+        $scope.$on('to-child',function (e,d) {
+            $scope.dd = d;
+            console.log(e)
+            console.log(arguments)
+            console.log('I\' the child, I got it',d)
+        })
+        $scope.diao = function () {
+            $scope.$emit("to-part","屌你")
+        }
+    });
+    app.controller("BroCtrl",function($scope){
+        $scope.$on('to-child',function (e,d) {
+            console.log('关我毛事')
+        })
+    })
+
+</script>
+
+</body>
+</html>

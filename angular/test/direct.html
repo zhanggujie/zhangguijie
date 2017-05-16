@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="www.atguigu.com">
+    <!-- 苹果手机是否全屏显示页面-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--控制苹果手机状态栏的颜色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title></title>
+</head>
+<body >
+<div ng-app="myApp">
+    <div my-hello></div>
+    <div ng-controller="Aaa">
+        <div my-tab my-id="div1" my-name="name" my-fn="show(num)" class="J-tab"></div>
+        <div my-tab my-id="div2" my-name="name" my-fn="show(num)" class="J-tab"></div>
+    </div>
+</div>
+<script type="text/javascript" src="../js/angular-1.5.5/angular.js"></script>
+<script type="text/javascript">
+    var m1 = angular.module("myApp",[]);
+    m1.directive("myHello",function () {
+        return {
+            restrict : "A",
+            replace : true,
+            template : "<div>hello angular</div>"
+        }
+    });
+    m1.controller("Aaa",function ($scope) {
+        $scope.name = 'xiecg';
+        $scope.age=18;
+        $scope.show = function (num) {
+            console.log(num)
+        }
+    })
+    m1.directive("myTab",function () {
+        return {
+            restrict : "ECMA",
+            replace : true, 
+            scope : {
+                myId : "@",
+                myName : "=",
+                myFn : "&"
+            },
+            controller : ["$scope",function ($scope) {
+                $scope.name = "this is a ciecg"
+            }],
+            template : '<div id="{{myId}}">\
+                    <input type="button" value="1" >
+        }
+    })
+</script>
+
+</body>
+</html>

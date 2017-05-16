@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="www.atguigu.com">
+    <!-- 苹果手机是否全屏显示页面-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--控制苹果手机状态栏的颜色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title></title>
+</head>
+<body ng-app="myApp">
+<div  ng-controller="MyController" style="background-color:{{color}}" >
+    <div hello>
+        hello world
+    </div>
+    <hello color="{{color}}" live='live'></hello>
+    <input type="text" ng-model="live">
+    <div direct sayHell="hello()"></div>
+</div>
+<div directive title="苦逼">
+    <ul>
+        <li>link</li>
+        <li>link</li>
+    </ul>
+</div>
+
+<input type="text" ng-model="user.name" name="userName" ensure-unique="userName" required>
+<!--<div ng-controller="MainController">-->
+    <!--outside mydirective: {{myProp}}-->
+
+<!--</div>-->
+<div doresdd ti="hello">
+    <ul>
+        <li>dddddd</li>
+    </ul>
+</div>
+<script type="text/javascript" src="http://s.zys.me/js/jq/jquery.js"></script>
+<script type="text/javascript" src="../js/angular-1.5.5/angular.js"></script>
+<script type="text/javascript">
+    angular.module("myApp",[])
+            .controller("MyController",["$scope",function ($scope) {
+                $scope.color="red";
+                $scope.live = "LIVE";
+                $scope.hello = function () {
+                    console.log("hello world")
+                }
+            }])
+            .controller("myCtrll",["$scope",function ($scope) {
+
+            }])
+            .controller("MainController",function ($scope) {
+                $scope.myPropdd = "dddddd"
+            })
+            .directive("hello",function () {
+                return{
+                    restrict : "AEMC",
+                    //template : "<button>click me</button>",
+                    templateUrl : "model.html",
+                    replace : true,
+                    //scope : true,继承父组件的属性
+                    scope : {
+                        color : "@",//使用父组件的属性表达式使用{{}}
+                        live : '='
+                    },
+                    link : function (scope,elements,attrs) {
+                        elements.bind("click",function () {
+                            elements.css("background","blue")
+                            scope.$apply(function () {
+                                scope.live = "YOU"
+                            })
+                        })
+                    }
+                }
+            })
+            .directive("directive",function () {
+                return {
+                    restrict : "A",
+                    template : "<h1>{{title}}</h1> <span ng-transclude></span>",
+                    scope : {
+                        title : "@"
+                    },
+                    transclude:true
+                }
+            })
+            .directive("direct",function () {
+                return {
+                    restrict : "A",
+                    template:"<button ng-click='sayHell()'>dsdd</button>",
+                    scope : {
+                        sayHell : "&"
+                    }
+                }
+            })
+            .directive("ensureUnique",function ($http) {
+                return {
+                    require : "ngModel",
+                    link : function (scope,ele,attrs,ctrl) {
+                        ctrl.$parsers.push(function (val) {
+                            console.log(val+"1111");
+                            console.log(ctrl.$parsers);
+                            console.log(ctrl.$viewValue);//val
+                        })
+                    }
+                }
+            })
+            .directive("doresdd",function () {
+                return {
+                    restrict : "A",
+                    template : "<h1>{{ti}}</h1><span ng-transclude></span>",
+                    scope :{
+                        ti : "@"
+                    },
+                    transclude:true
+
+                }
+            })
+</script>
+</body>
+</html>

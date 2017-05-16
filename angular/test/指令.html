@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="www.atguigu.com">
+    <!-- 苹果手机是否全屏显示页面-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--控制苹果手机状态栏的颜色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title></title>
+</head>
+<body>
+<a href="http://www.baidu.com" title="click me">百度</a>
+<button href="http://www.baidu.com" title="click me">按钮</button>
+<my-directive>
+    <!--自定义指令-->
+</my-directive>
+<div ng-controller="CityController">
+    <select ng-model="city" ng-options="city.name for city in cities">
+        <option value="">DDDDDD</option>
+    </select>
+    DEST ctiy : {{city.name}}
+</div>
+<script type="text/javascript" src="../js/angular-1.5.5/angular.js"></script>
+<script type="text/javascript">
+    angular.module("MyApp",[])
+            .directive("myDirective",function () {
+                return  {
+                    restrict : "E",
+                    replace : true,//设置true 不会出现标签<my-directive>
+                    template : "<a href='http://www.baidu.com'>Click me to go to baidu</a>"
+                }
+            })
+            .controller('CityController',function ($scope) {
+                $scope.cities = [
+                    {name : "seattle1"},
+                    {name : "seattle2"},
+                    {name : "seattle3"},
+                    {name : "seattle4"},
+                    {name : "seattle5"},
+                ]
+            })
+</script>
+</body>
+</html>

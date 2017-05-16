@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="www.atguigu.com">
+    <!-- 苹果手机是否全屏显示页面-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--控制苹果手机状态栏的颜色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" >
+    <meta name="format-detection" content="telephone=no">
+    <title></title>
+</head>
+<body ng-app="myApp">
+
+<div ng-controller="MyController">
+    <p>anguular js</p>
+    <h1 ng-bind="getting"></h1>
+    <div id="test">element测试test</div>
+    使用html字符串为参数:<input type="button" ng-click="button1()" value="btton1"><br>
+    使用dom元素作为参数:<input type="button" ng-click="button2()" value="button2">
+    <p ng-bind="add"></p>
+</div>
+<script type="text/javascript" src="../js/angular-1.5.5/angular.js"></script>
+
+<script type="text/javascript">
+    var serf = {name : "xiaoming"};
+    var app = angular.module('myApp',[]);
+    var f = angular.bind(serf, function (age) {
+        console.log(this.name+"is"+age)
+    },29);
+    f();
+    var m = angular.bind(serf, function (age) {
+        console.log(this.name+"is"+age)
+    });
+    m(39);
+    var serf = angular.copy(serf);
+    console.log(serf);
+    app.controller('MyController',function ($scope) {
+        $scope.getting = "Welecome";
+        //heml字符串
+        $scope.button1 = function () {
+            console.log(angular.element('<div id="test">element测试test</div>').html())
+        };
+        //dom元素作为参数
+        $scope.button2 = function () {
+            var a = document.getElementById('test');
+            angular.element(a).addClass("active");
+            console.log(angular.element(a).html());
+        };
+        var valus = {name : "ming",age : 23};
+        var log = [];
+        angular.forEach(valus,function (key , value) {
+            this.push(key + ":" + value);
+            $scope.add = log.join(",")
+        },log)
+    });
+
+
+</script>
+</body>
+</html>

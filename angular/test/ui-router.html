@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="www.atguigu.com">
+    <!-- 苹果手机是否全屏显示页面-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--控制苹果手机状态栏的颜色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title></title>
+    <style>
+        .active{
+            color: red;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<button id="but1" ui-sref="contacts({id:id})" ui-sref-active="active" ng-controller="Sontr" ng-click="state()">按钮1</button>
+<button id="but2">按钮2</button>
+<ui-view></ui-view>
+<script type="text/javascript" src="../js/angular-1.5.5/angular.js"></script>
+<script type="text/javascript" src="../js/angular-1.5.5/angular-ui-router.js"></script>
+<script type="text/javascript">
+    angular.module("myApp", ['ui.router'])
+            .config(function ($stateProvider) {
+                $stateProvider
+//                        .state("contacts", {
+//                            template: "<h1>Contacts</h1>"
+//                        })
+                        //.state("contacts", {
+//                            templateUrl: "contact.html"
+//                        })
+                        .state("contacts",{
+                            url : "/contacts/id=:id",
+                            templateUrl:function ($stateParams) {
+                                return 'contact.html';
+                            },
+                            controller :"myController"
+                        })
+            })
+            .controller("myController",function ($stateParams,$scope) {
+                console.log($stateParams);//url 中的参数
+                $scope.id = $stateParams.id
+            })
+            .controller("Sontr",function ($scope,$state) {
+                $scope.id = 5;
+                $scope.state = function () {
+                    $state.go("contacts",{id:9})
+                }
+
+            })
+
+
+    var a = {
+        name : "张三",
+        age  : "20",
+        sex : '男',
+        family : {
+            num : 9,
+            amout : "90w"
+        }
+    };
+    var c = {
+        name : "李四",
+        age : "29"
+    };
+    var b ={};
+    var r =  angular.extend(b, a, c);//如果a 和 c 的属性相同 c 会把a覆盖
+    console.log(r);
+    console.log(r.name)
+    //angular.bind(self,fn,args)
+    /**
+     *
+     * @type {{name: string}}
+     * bind 根据参数调用call或apply方法 所以参数 args 可以是数组；
+     */
+    var arr = [5,4,3,2,1]
+     var self = {
+         name : "安妮"
+     };
+     var obj = {
+         name : '接卡',
+         print : function (args) {
+             console.log(this.name + "is form" + args)
+         },
+         prints : function (args) {
+             angular.forEach(args, function (index,item) {
+                 console.log(index + "," + item)
+             });//等同于
+             args.forEach(function (index,item) {
+                 console.log(index + "," + item)
+             })
+         }
+     };
+     var bind = angular.bind(self, obj.print , "hello");
+    bind();
+    var binds = angular.bind(self, obj.prints , arr);
+    binds();
+
+    //angular.toJson(json)对象转化为字符串
+    var jj = angular.toJson({name:"jjj"});
+    console.log(jj);
+    //angular.fromJson json字符串 转化为对象
+    var bb = angular.fromJson('{"name":"bbb"}');
+    console.log(bb);
+    console.log(navigator)
+</script>
+
+</body>
+</html>
